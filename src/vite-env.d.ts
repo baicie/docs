@@ -14,3 +14,11 @@ declare module "*.md" {
   };
   export default component;
 }
+
+// declare module "@vue/runtime-core" {
+//   import { I18n } from "vue-i18n";
+//   interface ComponentCustomProperties {
+//     $router: Router;
+//     $i18n: I18n;
+//   }
+// }

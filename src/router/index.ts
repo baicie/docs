@@ -4,7 +4,7 @@ import Layout from "../layouts/index.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:lang(.*)",
-    redirect: "/docs",
+    redirect: "/docs/demo",
   },
   {
     path: "/docs",

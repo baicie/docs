@@ -8,8 +8,8 @@ const i18n = createI18n({
   locale: isZhCN(location.pathname) ? "zh-CN" : "en-US",
   fallbackLocale: "en-US",
   messages: {
-    "zh-CN": "zhCN",
-    "en-US": "enUS",
+    // "zh-CN": "zhCN",
+    // "en-US": "enUS",
   },
 });
 

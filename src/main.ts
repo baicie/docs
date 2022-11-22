@@ -34,6 +34,6 @@ app.use(router);
 // app.use(store);
 app.use(i18n);
 
-app.config.globalProperties.$i18n = i18n;
+// app.config.globalProperties.$i18n = i18n;
 
 app.mount("#app");

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Layout from "../layouts/index.vue";
-
+import docsRoutes from "./docsRoutes";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:lang(.*)",
@@ -19,6 +19,7 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import("../md/index.md"),
       },
+      ...docsRoutes,
     ],
   },
 ];

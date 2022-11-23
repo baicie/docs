@@ -1,11 +1,13 @@
-const parseEmojis = (str: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const emojiData = require("markdown-it-emoji/lib/data/full.json");
-  return String(str).replace(
-    /:(.+?):/g,
-    (placeholder, key) => emojiData[key] || placeholder
-  );
-};
+// import emojiData from "markdown-it-emoji/lib/data/full.json";
+
+// const parseEmojis = (str: string) => {
+//   // eslint-disable-next-line @typescript-eslint/no-var-requires
+//   // const emojiData = require("markdown-it-emoji/lib/data/full.json");
+//   return String(str).replace(
+//     /:(.+?):/g,
+//     (placeholder, key) => emojiData[key] || placeholder
+//   );
+// };
 
 const unescapeHtml = (html: string) =>
   String(html)
@@ -43,7 +45,7 @@ const compose = (...processors: ((str: string) => string)[]) => {
 // Unescape html, parse emojis and remove some md tokens.
 export const parseHeader = compose(
   unescapeHtml,
-  parseEmojis,
+  // parseEmojis,
   removeMarkdownTokens,
   trim
 );

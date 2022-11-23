@@ -4,21 +4,21 @@ import docsRoutes from "./docsRoutes";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:lang(.*)",
-    redirect: "/docs/demo",
+    redirect: "/docs/index",
   },
   {
     path: "/docs",
     component: Layout,
     children: [
-      {
-        path: "demo",
-        meta: {
-          enTitle: "Demo",
-          title: "示例",
-          category: "docs",
-        },
-        component: () => import("../md/index.md"),
-      },
+      // {
+      //   path: "demo",
+      //   meta: {
+      //     enTitle: "Demo",
+      //     title: "示例",
+      //     category: "docs",
+      //   },
+      //   component: () => import("../md/index.md"),
+      // },
       ...docsRoutes,
     ],
   },

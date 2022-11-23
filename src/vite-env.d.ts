@@ -22,3 +22,10 @@ declare module "*.md" {
 //     $i18n: I18n;
 //   }
 // }
+
+// typings.d.ts
+
+declare module "*.json" {
+  const value: any;
+  export default value;
+}

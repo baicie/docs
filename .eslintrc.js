@@ -7,6 +7,7 @@ module.exports = {
     jest: true,
     es6: true,
   },
+
   // parser: '@typescript-eslint/parser',
   // parserOptions: {
   //   parser: 'babel-eslint',

@@ -41,7 +41,11 @@
           @visibleChange="onCopyTooltipVisibleChange"
         >
           <component
-            :is="copied && copyTooltipVisible ? 'CheckOutlined' : 'SnippetsOutlined'"
+            :is="
+              copied && copyTooltipVisible
+                ? 'CheckOutlined'
+                : 'SnippetsOutlined'
+            "
             key="copy"
             v-clipboard:copy="type === 'TS' ? sourceCode : jsSourceCode"
             v-clipboard:success="handleCodeCopied"
@@ -49,7 +53,10 @@
           />
         </a-tooltip>
         <a-tooltip v-else :title="$t('app.demo.copy')">
-          <SnippetsOutlined class="code-box-code-copy code-box-code-action" @click="warning" />
+          <SnippetsOutlined
+            class="code-box-code-copy code-box-code-action"
+            @click="warning"
+          />
         </a-tooltip>
         <a-tooltip :title="$t(`app.demo.code.${codeExpand ? 'hide' : 'show'}`)">
           <span class="code-expand-icon code-box-code-action">
@@ -60,7 +67,9 @@
                   ? 'https://gw.alipayobjects.com/zos/antfincdn/btT3qDZn1U/wSAkBuJFbdxsosKKpqyq.svg'
                   : 'https://gw.alipayobjects.com/zos/antfincdn/Z5c7kzvi30/expand.svg'
               "
-              :class="codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'"
+              :class="
+                codeExpand ? 'code-expand-icon-hide' : 'code-expand-icon-show'
+              "
               @click="handleCodeExpand"
             />
             <img
@@ -70,7 +79,9 @@
                   ? 'https://gw.alipayobjects.com/zos/antfincdn/CjZPwcKUG3/OpROPHYqWmrMDBFMZtKF.svg'
                   : 'https://gw.alipayobjects.com/zos/antfincdn/4zAaozCvUH/unexpand.svg'
               "
-              :class="codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'"
+              :class="
+                codeExpand ? 'code-expand-icon-show' : 'code-expand-icon-hide'
+              "
               @click="handleCodeExpand"
             />
           </span>
@@ -87,16 +98,20 @@
 </template>
 
 <script lang="ts">
-import type { GlobalConfig } from '../App.vue';
-import { GLOBAL_CONFIG } from '../SymbolKey';
-import { computed, defineComponent, inject, onMounted, ref } from 'vue';
-import { CheckOutlined, SnippetsOutlined, CodeSandboxOutlined } from '@ant-design/icons-vue';
-import { getCodeSandboxParams } from '../utils/generateOnlineDemo';
-import packageInfo from '../../../package.json';
+import type { GlobalConfig } from "../App.vue";
+import { GLOBAL_CONFIG } from "../SymbolKey";
+import { computed, defineComponent, inject, onMounted, ref } from "vue";
+import {
+  CheckOutlined,
+  SnippetsOutlined,
+  CodeSandboxOutlined,
+} from "@ant-design/icons-vue";
+// import { getCodeSandboxParams } from '../utils/generateOnlineDemo';
+// import packageInfo from "../../../package.json";
 
 // import { Modal } from 'ant-design-vue';
 export default defineComponent({
-  name: 'DemoBox',
+  name: "DemoBox",
   components: {
     CheckOutlined,
     SnippetsOutlined,
@@ -107,25 +122,25 @@ export default defineComponent({
   },
   setup(props) {
     const codeExpand = ref(false);
-    const type = ref('TS');
+    const type = ref("TS");
     const copyTooltipVisible = ref(false);
     const copied = ref(false);
     const codeRef = ref<HTMLDivElement>();
     const sectionId = computed(() => {
-      const relativePath = props.jsfiddle?.relativePath || '';
-      return `${relativePath.split('/').join('-').replace('.vue', '')}`;
+      const relativePath = props.jsfiddle?.relativePath || "";
+      return `${relativePath.split("/").join("-").replace(".vue", "")}`;
     });
-    const inIframe = inject('inIframe', false);
+    const inIframe = inject("inIframe", false);
     const iframeHeight = computed(() => props.jsfiddle?.iframe);
     // eslint-disable-next-line @typescript-eslint/no-empty-function
-    const addDemosInfo: any = inject('addDemosInfo', () => {});
+    const addDemosInfo: any = inject("addDemosInfo", () => {});
 
     const globalConfig = inject<GlobalConfig>(GLOBAL_CONFIG);
     const title = computed(
       () =>
         props.jsfiddle &&
         props.jsfiddle.title &&
-        props.jsfiddle?.title[globalConfig.isZhCN.value ? 'zh-CN' : 'en-US'],
+        props.jsfiddle?.title[globalConfig.isZhCN.value ? "zh-CN" : "en-US"]
     );
     const warning = () => {
       // Modal.warning({
@@ -138,8 +153,11 @@ export default defineComponent({
       return (
         props.jsfiddle &&
         props.jsfiddle.title &&
-        props.jsfiddle?.title['en-US'] &&
-        String(props.jsfiddle?.title['en-US']).split(' ').join('-').toLowerCase()
+        props.jsfiddle?.title["en-US"] &&
+        String(props.jsfiddle?.title["en-US"])
+          .split(" ")
+          .join("-")
+          .toLowerCase()
       );
     });
     const onCopyTooltipVisibleChange = (visible: boolean) => {
@@ -157,12 +175,13 @@ export default defineComponent({
               `<h2 id="zh-CN">zh-CN <a class="header-anchor" href="#zh-CN">
           <span aria-hidden="true" class="anchor">#</span>
         </a></h2>`,
-              '',
-            ).split(`<h2 id="en-US">en-US <a class="header-anchor" href="#en-US">
+              ""
+            )
+              .split(`<h2 id="en-US">en-US <a class="header-anchor" href="#en-US">
           <span aria-hidden="true" class="anchor">#</span>
-        </a></h2>`)[globalConfig.isZhCN.value ? 0 : 1] || ''
+        </a></h2>`)[globalConfig.isZhCN.value ? 0 : 1] || ""
           ).trim()
-        : '',
+        : ""
     );
     const handleCodeExpand = () => {
       if (globalConfig.blocked.value) {
@@ -179,37 +198,39 @@ export default defineComponent({
         warning();
         return;
       }
-      type.value = type.value === 'TS' ? 'JS' : 'TS';
+      type.value = type.value === "TS" ? "JS" : "TS";
     };
     const handleCodeSandbox = () => {
-      const code = codeRef.value!.innerText;
-      const params = getCodeSandboxParams(code, {
-        title: `${title.value} - ant-design-vue@${packageInfo.version}`,
-      });
-      const div = document.createElement('div');
-      div.style.display = 'none';
-      div.innerHTML = `<form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
-        <input type="hidden" name="parameters" value="${params}" />
-        <input type="submit" value="Open in sandbox" />
-      </form>`;
+      // const code = codeRef.value!.innerText;
+      // const params = getCodeSandboxParams(code, {
+      //   title: `${title.value} - ant-design-vue@${packageInfo.version}`,
+      // });
+      const div = document.createElement("div");
+      div.style.display = "none";
+      // div.innerHTML = `<form action="https://codesandbox.io/api/v1/sandboxes/define" method="POST" target="_blank">
+      //   // <input type="hidden" name="parameters" value="${params}" />
+      //   <input type="submit" value="Open in sandbox" />
+      // </form>`;
       document.body.appendChild(div);
       (div.firstElementChild as HTMLFormElement).submit();
       document.body.removeChild(div);
     };
     const highlightClass = computed(() => {
       return {
-        'highlight-wrapper': true,
-        'highlight-wrapper-expand': codeExpand.value,
+        "highlight-wrapper": true,
+        "highlight-wrapper-expand": codeExpand.value,
       };
     });
-    const iframeDemo = inject('iframeDemo', {});
+    const iframeDemo = inject("iframeDemo", {});
     onMounted(() => {
       addDemosInfo({
         href: `#${sectionId.value}`,
         title,
       });
     });
-    const theme = computed(() => inject('themeMode', { theme: ref('default') }).theme.value);
+    const theme = computed(
+      () => inject("themeMode", { theme: ref("default") }).theme.value
+    );
     return {
       docHtml,
       iframeDemo,
@@ -231,8 +252,12 @@ export default defineComponent({
       handleCodeCopied,
       handleChangeType,
       highlightClass,
-      sourceCode: decodeURIComponent(escape(window.atob(props.jsfiddle?.sourceCode))),
-      jsSourceCode: decodeURIComponent(escape(window.atob(props.jsfiddle?.jsSourceCode))),
+      sourceCode: decodeURIComponent(
+        escape(window.atob(props.jsfiddle?.sourceCode))
+      ),
+      jsSourceCode: decodeURIComponent(
+        escape(window.atob(props.jsfiddle?.jsSourceCode))
+      ),
       codeRef,
       handleCodeSandbox,
     };

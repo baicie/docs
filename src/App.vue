@@ -7,7 +7,7 @@
 import { computed, provide, ref, Ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import useMediaQuery from "./hooks/useMediaQuery";
-import { GLOBAL_CONFIG } from "./SymbolKey";
+import GLOBAL_CONFIG from "./SymbolKey";
 
 export interface GlobalConfig {
   isMobile: Ref<boolean>;

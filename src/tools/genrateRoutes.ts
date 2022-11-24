@@ -1,4 +1,4 @@
-import { ESLint } from "eslint";
+// import { ESLint } from "eslint";
 // import esConfig from '../../'
 import fs from "fs";
 import { globbySync } from "globby";
@@ -14,11 +14,11 @@ async function genrateRoutes() {
     cwd: baseSrc,
   });
 
-  const dirs = globbySync(``, {
-    deep: 1,
-    onlyDirectories: true,
-    cwd: baseSrc,
-  });
+  // const dirs = globbySync(``, {
+  //   deep: 1,
+  //   onlyDirectories: true,
+  //   cwd: baseSrc,
+  // });
 
   const components: Record<string, { path: string } & object> = {};
 
@@ -40,7 +40,7 @@ async function genrateRoutes() {
             path: '${
               "path" in components[component]
                 ? components[component]["path"]
-                : component
+                : encodeURIComponent(component)
             }:lang(-cn)?',
             meta: ${JSON.stringify(components[component])},
             component: () => import('../../${baseSrc}/${component}.md'),

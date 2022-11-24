@@ -2,8 +2,8 @@
     export default [
       
           {
-            path: 'chinese:lang(-cn)?',
-            meta: {"category":"Components","subtitle":"固钉","type":"导航","title":"Affix","path":"chinese"},
+            path: '2.%20%E4%B8%AD%E6%96%87:lang(-cn)?',
+            meta: {"category":"Components","subtitle":"固钉","type":"导航","title":"Affix"},
             component: () => import('../../src/md/2. 中文.md'),
           },
           {

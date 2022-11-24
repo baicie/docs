@@ -1,30 +1,30 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Layout from "../layouts/index.vue";
 import docsRoutes from "./docsRoutes";
+import { afterEach, beforeEach } from "./helper";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:lang(.*)",
-    redirect: "/docs/index",
+    redirect: "/docs/home",
   },
   {
     path: "/docs",
     component: Layout,
     children: [
-      // {
-      //   path: "demo",
-      //   meta: {
-      //     enTitle: "Demo",
-      //     title: "示例",
-      //     category: "docs",
-      //   },
-      //   component: () => import("../md/index.md"),
-      // },
+      {
+        path: "home",
+        component: () => import("../home.vue"),
+      },
+      {
+        path: "demo",
+        meta: {},
+        component: () => import("../demo.vue"),
+      },
       ...docsRoutes,
     ],
   },
 ];
-
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior: (to) => {
@@ -33,3 +33,7 @@ export default createRouter({
     }
   },
 });
+
+router.beforeEach(beforeEach);
+router.afterEach(afterEach);
+export default router;

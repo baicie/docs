@@ -5,23 +5,12 @@ import { afterEach, beforeEach } from "./helper";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:lang(.*)",
-    redirect: "/docs/home",
+    redirect: "/docs/index",
   },
   {
     path: "/docs",
     component: Layout,
-    children: [
-      {
-        path: "home",
-        component: () => import("../home.vue"),
-      },
-      {
-        path: "demo",
-        meta: {},
-        component: () => import("../demo.vue"),
-      },
-      ...docsRoutes,
-    ],
+    children: [...docsRoutes],
   },
 ];
 const router = createRouter({

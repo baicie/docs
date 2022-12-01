@@ -17,12 +17,12 @@
         <Logo />
       </a-col>
       <a-col v-bind="colProps[1]" class="menu-row">
-        <SearchBox
+        <!-- <SearchBox
           key="search"
           :is-zh-c-n="isZhCN"
           :responsive="responsive"
           @triggerFocus="onTriggerSearching"
-        />
+        /> -->
         <Menu v-if="!isMobile" />
       </a-col>
     </a-row>
@@ -38,7 +38,7 @@ import { GLOBAL_CONFIG } from "../../SymbolKey";
 // import { getLocalizedPathname } from "../../utils/util";
 import Logo from "./Logo.vue";
 import Menu from "./Menu.vue";
-import SearchBox from "./SearchBox.vue";
+// import SearchBox from "./SearchBox.vue";
 // export default defineComponent({
 // components: {
 //   Logo,

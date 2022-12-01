@@ -1,16 +1,23 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Layout from "../layouts/index.vue";
 import docsRoutes from "./docsRoutes";
+import componentsRoutes from "./componentsRoutes";
 import { afterEach, beforeEach } from "./helper";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:lang(.*)",
-    redirect: "/docs/index",
+    redirect: "/docs",
   },
   {
     path: "/docs",
     component: Layout,
+    // redirect: "/docs/demo",
     children: [...docsRoutes],
+  },
+  {
+    path: "/components",
+    component: Layout,
+    children: [...componentsRoutes],
   },
 ];
 const router = createRouter({

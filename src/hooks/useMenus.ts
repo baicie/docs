@@ -1,8 +1,7 @@
 import { groupBy, sortBy } from "lodash-es";
 import type { ComputedRef } from "vue";
-import { computed, inject } from "vue";
+import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { GLOBAL_CONFIG } from "../SymbolKey";
 const typeOrder: any = {
   组件总览: { order: -1, en: "Overview" },
   通用: { order: 0, en: "General" },
@@ -23,12 +22,13 @@ const useMenus = (): {
   const route = useRoute();
   const router = useRouter();
   const routes = router.getRoutes();
-  const globalConfig = inject<any>(GLOBAL_CONFIG);
+
+  // const globalConfig = inject<any>(GLOBAL_CONFIG);
   const menus = computed(() => {
     const path = route.path;
     const category = path.split("/")[1];
     const pattern = /^\/iframe/;
-    const isZhCN = globalConfig.isZhCN.value;
+    // const isZhCN = globalConfig.isZhCN.value;
     const ms = routes
       .filter((r) => {
         const inCategory =
@@ -36,12 +36,9 @@ const useMenus = (): {
           r.meta.category &&
           (r.meta.category as string).toLowerCase() === category &&
           !pattern.test(r.path);
+        // category存在且为docs
         if (inCategory && category === "docs") {
-          if (isZhCN) {
-            return r.path.indexOf("-cn") >= 0;
-          } else {
-            return r.path.indexOf("-cn") === -1;
-          }
+          return true;
         } else {
           return inCategory;
         }
@@ -50,17 +47,9 @@ const useMenus = (): {
         ...r.meta,
         path: r.path.split(":lang")[0].replace("-cn", ""),
       }));
-    // if (category === 'docs') {
-    //   ms.push({
-    //     enTitle: 'Change Log',
-    //     title: '更新日志',
-    //     category: 'docs',
-    //     target: '_blank',
-    //     path: globalConfig.isZhCN.value
-    //       ? 'https://github.com/vueComponent/ant-design-vue/blob/main/CHANGELOG.zh-CN.md'
-    //       : 'https://github.com/vueComponent/ant-design-vue/blob/main/CHANGELOG.en-US.md',
-    //   } as any);
-    // }
+
+    console.log(ms);
+
     return ms;
   });
   const activeMenuItem = computed(() => {

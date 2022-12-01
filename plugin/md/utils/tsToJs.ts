@@ -1,10 +1,12 @@
 import { transformSync } from "@babel/core";
 import { ESLint } from "eslint";
-// import path from "path";
+import config from "../../../.eslintrc.js";
+import path from "path";
 const engine = new ESLint({
   fix: true,
   useEslintrc: false,
-  // baseConfig: require(path.join(process.cwd(), '.eslintrc.js')),
+  // baseConfig: require(path.join(process.cwd(), ".eslintrc.js")),
+  baseConfig: config,
 });
 const tsToJs = async (content: string): Promise<string> => {
   if (!content) {

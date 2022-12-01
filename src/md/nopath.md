@@ -1,1 +1,4 @@
-nomad
+---
+category: "docs"
+title: "docs"
+---

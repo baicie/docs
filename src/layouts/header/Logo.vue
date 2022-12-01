@@ -1,10 +1,10 @@
 <template>
-  <h1>
+  <!-- <h1>
     <a id="logo" :href="isZhCN ? '/index-cn' : '/index'">
       <img alt="logo" :src="logo" />
       Ant Design Vue
     </a>
-  </h1>
+  </h1> -->
 </template>
 
 <script lang="ts">

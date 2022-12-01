@@ -6,16 +6,14 @@
     :selected-keys="[activeMenuItem]"
     disabled-overflow
   >
-    <a-menu-item key="docs/vue">
-      <router-link :to="getLocalizedPathname('/docs/vue/introduce', isZhCN)">
-        <!-- {{ $t("app.header.menu.documentation") }} -->
-        {{ 1 }}
+    <a-menu-item key="docs">
+      <router-link :to="getLocalizedPathname('/docs/introduce', isZhCN)">
+        {{ $t("app.header.menu.documentation") }}
       </router-link>
     </a-menu-item>
     <a-menu-item key="components">
-      <router-link :to="getLocalizedPathname('/components/overview/', isZhCN)">
-        <!-- {{ $t("app.header.menu.components") }} -->
-        {{ 2 }}
+      <router-link :to="getLocalizedPathname('/components/demo/', isZhCN)">
+        {{ $t("app.header.menu.components") }}
       </router-link>
     </a-menu-item>
   </a-menu>

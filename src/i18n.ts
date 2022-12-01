@@ -1,6 +1,6 @@
 import { createI18n } from "vue-i18n";
-// import enUS from "./locale/en-US";
-// import zhCN from "./locale/zh-CN";
+import enUS from "./theme/en-US";
+import zhCN from "./theme/zh-CN";
 import { isZhCN } from "./utils/util";
 
 const i18n = createI18n({
@@ -8,8 +8,8 @@ const i18n = createI18n({
   locale: isZhCN(location.pathname) ? "zh-CN" : "en-US",
   fallbackLocale: "en-US",
   messages: {
-    // "zh-CN": "zhCN",
-    // "en-US": "enUS",
+    "zh-CN": zhCN,
+    "en-US": enUS,
   },
 });
 

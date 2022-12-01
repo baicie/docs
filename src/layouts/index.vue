@@ -38,10 +38,6 @@
         >
           <a-affix>
             <section class="main-menu-inner">
-              <!-- <Sponsors :is-c-n="isZhCN" /> -->
-              <div>
-                <surelyVueVue />
-              </div>
               <Menu
                 :menus="dataSource"
                 :active-menu-item="activeMenuItem"
@@ -116,7 +112,7 @@ import { useRoute } from "vue-router";
 import type { GlobalConfig } from "../App.vue";
 import TopAd from "../components/rice/top_rice.vue";
 import WWAdsVue from "../components/rice/WWAds.vue";
-import surelyVueVue from "../components/surelyVue.vue";
+// import surelyVueVue from "../components/surelyVue.vue";
 import useMenus from "../hooks/useMenus";
 import { GLOBAL_CONFIG } from "../SymbolKey";
 import Demo from "./Demo.vue";
@@ -159,7 +155,7 @@ watch(
 const isDemo = computed(() => {
   return (
     route.path.indexOf("/components") === 0 &&
-    route.path.indexOf("/components/overview") !== 0
+    route.path.indexOf("/components/demo") !== 0
   );
 });
 const isTablePage = computed(() => {

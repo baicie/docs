@@ -3,7 +3,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import Github from "./Github.vue";
 import More from "./More.vue";
 import Navigation from "./Navigation.vue";
 import { version } from "ant-design-vue";
@@ -17,7 +16,7 @@ export default defineComponent({
   name: "HeaderMenu",
   components: {
     Navigation,
-    Github,
+    // Github,
     More,
   },
   props: ["isMobile"],

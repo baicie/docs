@@ -1,8 +1,6 @@
 ---
-category: Components
-subtitle: 固钉
-type: 导航
-title: Affix
+category: "docs"
+title: "docs"
 path: index2
 ---
 

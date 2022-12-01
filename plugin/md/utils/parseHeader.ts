@@ -1,13 +1,13 @@
 // import emojiData from "markdown-it-emoji/lib/data/full.json";
 
-// const parseEmojis = (str: string) => {
-//   // eslint-disable-next-line @typescript-eslint/no-var-requires
-//   // const emojiData = require("markdown-it-emoji/lib/data/full.json");
-//   return String(str).replace(
-//     /:(.+?):/g,
-//     (placeholder, key) => emojiData[key] || placeholder
-//   );
-// };
+const parseEmojis = (str: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const emojiData = require("markdown-it-emoji/lib/data/full.json");
+  return String(str).replace(
+    /:(.+?):/g,
+    (placeholder, key) => emojiData[key] || placeholder
+  );
+};
 
 const unescapeHtml = (html: string) =>
   String(html)

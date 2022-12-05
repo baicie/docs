@@ -6,7 +6,7 @@
     :selected-keys="[activeMenuItem]"
     disabled-overflow
   >
-    <a-menu-item key="docs">
+    <!-- <a-menu-item key="docs">
       <router-link :to="getLocalizedPathname('/docs/introduce', isZhCN)">
         {{ $t("app.header.menu.documentation") }}
       </router-link>
@@ -15,7 +15,16 @@
       <router-link :to="getLocalizedPathname('/components/demo/', isZhCN)">
         {{ $t("app.header.menu.components") }}
       </router-link>
-    </a-menu-item>
+    </a-menu-item> -->
+
+    <template v-for="item in rootRoutes" :key="item.path">
+      <a-menu-item>
+        <router-link :to="getLocalizedPathname(`/${item.path}/index`, isZhCN)">
+          <!-- {{ $t("app.header.menu.components") }} -->
+          {{ item.meta.title }}
+        </router-link>
+      </a-menu-item>
+    </template>
   </a-menu>
 </template>
 <script lang="ts">
@@ -24,6 +33,8 @@ import { GLOBAL_CONFIG } from "../../SymbolKey";
 import { getLocalizedPathname } from "../../utils/util";
 import { computed, defineComponent, inject, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import rootRoutes from "../../router/rootRoutes";
+
 export default defineComponent({
   emits: ["langChange"],
   setup() {
@@ -58,6 +69,7 @@ export default defineComponent({
       getLocalizedPathname,
       menuMode,
       activeMenuItem,
+      rootRoutes,
     };
   },
 });

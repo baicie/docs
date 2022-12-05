@@ -81,8 +81,8 @@ watch(
       : "Ant Design Vue — An enterprise-class UI components based on Ant Design and Vue.js";
     if (item && item.title) {
       title = props.isZhCN
-        ? `${item.subtitle || ""} ${item.title} - Ant Design Vue`
-        : `${item.enTitle || item.title} - Ant Design Vue`;
+        ? `${item.subtitle || ""} ${item.title} - 文档`
+        : `${item.enTitle || item.title} - 文档`;
     }
     document.title = title.trim();
   },

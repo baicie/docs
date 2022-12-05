@@ -1,5 +1,8 @@
 export function isZhCN(name: string): boolean {
-  return /-cn\/?$/.test(name);
+  // return /-cn\/?$/.test(name);
+  console.log(name);
+
+  return true;
 }
 
 export function isLocalStorageNameSupported() {

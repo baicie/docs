@@ -5,5 +5,5 @@
 </template>
 <script setup lang="ts">
 import Base from "./demo/base.vue";
-import MarkDown from "./index.md";
+// import MarkDown from "./index.md";
 </script>

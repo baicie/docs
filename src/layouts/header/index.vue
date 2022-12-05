@@ -77,10 +77,10 @@ const colProps = isHome.value
         xs: 0,
       },
     ];
-const searching = ref(false);
-const onTriggerSearching = (value: boolean) => {
-  searching.value = value;
-};
+// const searching = ref(false);
+// const onTriggerSearching = (value: boolean) => {
+//   searching.value = value;
+// };
 const initDocSearch = () => {
   // window.docsearch({
   //   apiKey: "92003c1d1d07beef165b08446f4224a3",
@@ -117,7 +117,11 @@ watch(visibleAlertBanner, () => {
 
 // const isZhCN = globalConfig.isZhCN;
 // const isMobile = globalConfig.isMobile;
-const { isMobile, isZhCN, responsive } = globalConfig;
+const {
+  isMobile,
+  //  isZhCN,
+  //  responsive
+} = globalConfig;
 
 const headerClassName = {
   clearfix: true,

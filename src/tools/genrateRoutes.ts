@@ -23,11 +23,14 @@ async function genrateRoutes() {
       const content = readFileSync(dirIndexPath).toString();
       const { data } = matter(content);
 
-      dirs[data.path ? data.path : pat] = {
-        ...dirs[data.patindexh ? data.path : pat],
+      dirs[pat] = {
+        ...dirs[pat],
         ...data,
+        path: data.pathF ? data.pathF : pat,
+        title: data.title ? data.title : pat,
       };
 
+      // 二级md文件生成
       {
         const dir_path = `${baseSrc}/${pat}/`;
         // 获取所有层级 限定二级
@@ -35,20 +38,36 @@ async function genrateRoutes() {
           deep: 2,
           cwd: dir_path,
         });
-        const components: Record<string, { path: string } & object> = {};
+        const components: Record<
+          string,
+          {
+            path: string;
+            title: string;
+            pat: string;
+            category: string;
+          } & object
+        > = {};
 
         paths.forEach((pat2) => {
           const content = fs.readFileSync(`${dir_path}/${pat2}`).toString();
           const componentName = path.basename(pat2, path.extname(pat2));
 
-          const { data } = matter(content);
+          const { data: dataC } = matter(content);
 
-          components[componentName] = { ...components[componentName], ...data };
+          components[componentName] = {
+            ...components[componentName],
+            ...dataC,
+            title: dataC.title ? dataC.title : pat2,
+            // 优先文件中的 category 之后根据父级path
+            category: dataC.category ? dataC.category : data.pathF ?? pat,
+          };
         });
 
         const TEMPLATE = `
             export default [
       ${Object.keys(components).map((component) => {
+        console.log(component);
+
         return `
           {
             path: '${
@@ -62,7 +81,7 @@ async function genrateRoutes() {
       })}
     ];`;
 
-        fs.writeFileSync(`src/router/${pat}Routes.ts`, TEMPLATE);
+        fs.writeFileSync(`src/router/${data.pathF ?? pat}Routes.ts`, TEMPLATE);
       }
     }
   });
@@ -76,7 +95,7 @@ async function genrateRoutes() {
       return `import ${dir_path}Routes from "./${dir_path}Routes";`;
     })
     .toString()
-    .replace(",", "")}
+    .replace(/[,]/g, "")}
 
   export default [
     ${Object.keys(dirs).map((dir) => {

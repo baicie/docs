@@ -33,7 +33,8 @@ const useMenus = (): {
         (r) =>
           r.meta &&
           r.meta.category &&
-          (r.meta.category as string).toLowerCase() === category &&
+          (r.meta.category as string).toLowerCase() ===
+            category.toLowerCase() &&
           r.path.split("/").length > 2
       )
       .map((r) => ({

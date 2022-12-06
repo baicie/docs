@@ -1,5 +1,5 @@
 ---
-category: "docs"
+category: "test"
 title: "docs"
 ---
 

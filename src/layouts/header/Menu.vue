@@ -3,7 +3,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import More from "./More.vue";
+// import More from "./More.vue";
 import Navigation from "./Navigation.vue";
 import { version } from "ant-design-vue";
 import {
@@ -17,7 +17,7 @@ export default defineComponent({
   components: {
     Navigation,
     // Github,
-    More,
+    // More,
   },
   props: ["isMobile"],
   setup() {

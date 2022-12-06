@@ -6,21 +6,9 @@
     :selected-keys="[activeMenuItem]"
     disabled-overflow
   >
-    <!-- <a-menu-item key="docs">
-      <router-link :to="getLocalizedPathname('/docs/introduce', isZhCN)">
-        {{ $t("app.header.menu.documentation") }}
-      </router-link>
-    </a-menu-item>
-    <a-menu-item key="components">
-      <router-link :to="getLocalizedPathname('/components/demo/', isZhCN)">
-        {{ $t("app.header.menu.components") }}
-      </router-link>
-    </a-menu-item> -->
-
-    <template v-for="item in rootRoutes" :key="item.path">
+    <template v-for="item in navInfo" :key="item.path">
       <a-menu-item>
-        <router-link :to="getLocalizedPathname(`/${item.path}/index`, isZhCN)">
-          <!-- {{ $t("app.header.menu.components") }} -->
+        <router-link :to="getLocalizedPathname(`${item.path}/index`, isZhCN)">
           {{ item.meta.title }}
         </router-link>
       </a-menu-item>
@@ -28,12 +16,12 @@
   </a-menu>
 </template>
 <script lang="ts">
-import type { GlobalConfig } from "../../App.vue";
-import { GLOBAL_CONFIG } from "../../SymbolKey";
-import { getLocalizedPathname } from "../../utils/util";
 import { computed, defineComponent, inject, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import rootRoutes from "../../router/rootRoutes";
+import type { GlobalConfig } from "../../App.vue";
+import navInfo from "../../router/navInfo";
+import { GLOBAL_CONFIG } from "../../SymbolKey";
+import { getLocalizedPathname } from "../../utils/util";
 
 export default defineComponent({
   emits: ["langChange"],
@@ -44,32 +32,24 @@ export default defineComponent({
     });
     const route = useRoute();
     const activeMenuItem = ref("home");
+
     watch(
       () => route.path,
       (pathname) => {
         const modules = pathname.split("/");
-        if (
-          pathname === "/docs/resources" ||
-          pathname === "/docs/resources-cn"
-        ) {
-          activeMenuItem.value = "docs/resources";
-        } else if (modules[1] === "components") {
-          activeMenuItem.value = "components";
-        } else if (modules[1] === "docs") {
-          activeMenuItem.value = `${modules[1]}/${modules[2]}`;
-        } else {
-          activeMenuItem.value = "home";
-        }
+        activeMenuItem.value = `/${modules[1]}`;
       },
       { immediate: true }
     );
+
     return {
       isMobile: globalConfig.isMobile,
       isZhCN: globalConfig.isZhCN,
       getLocalizedPathname,
       menuMode,
       activeMenuItem,
-      rootRoutes,
+      // rootRoutes,
+      navInfo,
     };
   },
 });

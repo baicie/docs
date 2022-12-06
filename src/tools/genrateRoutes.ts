@@ -57,7 +57,7 @@ async function genrateRoutes() {
                 : encodeURIComponent(component)
             }:lang(-cn)?',
             meta: ${JSON.stringify(components[component])},
-            component: () => import('../../${dir_path}/${component}.md'),
+            component: () => import('../../${dir_path}${component}.md'),
           }`;
       })}
     ];`;
@@ -85,7 +85,7 @@ async function genrateRoutes() {
 
       return `
           {
-            path: '${dir_path}',
+            path: '/${dir_path}',
             meta: ${JSON.stringify(dirs[dir])},
             component: Layout,
             children: [...${dir_path}Routes],
@@ -95,7 +95,23 @@ async function genrateRoutes() {
   ]
   `;
 
-  console.log(TEMPLATE);
+  const TEMPLATE_NAV = `
+  export default [
+    ${Object.keys(dirs).map((dir) => {
+      const dir_path =
+        "path" in dirs[dir] ? dirs[dir]["path"] : encodeURIComponent(dir);
+
+      return `
+          {
+            path: '/${dir_path}',
+            meta: ${JSON.stringify(dirs[dir])},
+          }
+        `;
+    })}
+  ]
+  `;
+
+  // console.log(TEMPLATE);
 
   // 格式化
   // const engine = new ESLint({
@@ -111,5 +127,6 @@ async function genrateRoutes() {
   // console.log(TEMPLATE);
   // 写入
   fs.writeFileSync("src/router/rootRoutes.ts", TEMPLATE);
+  fs.writeFileSync("src/router/navInfo.ts", TEMPLATE_NAV);
 }
 genrateRoutes();

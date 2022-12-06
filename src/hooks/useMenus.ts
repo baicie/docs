@@ -27,22 +27,15 @@ const useMenus = (): {
   const menus = computed(() => {
     const path = route.path;
     const category = path.split("/")[1];
-    const pattern = /^\/iframe/;
-    // const isZhCN = globalConfig.isZhCN.value;
+
     const ms = routes
-      .filter((r) => {
-        const inCategory =
+      .filter(
+        (r) =>
           r.meta &&
           r.meta.category &&
           (r.meta.category as string).toLowerCase() === category &&
-          !pattern.test(r.path);
-        // category存在且为docs
-        if (inCategory && category === "docs") {
-          return true;
-        } else {
-          return inCategory;
-        }
-      })
+          r.path.split("/").length > 2
+      )
       .map((r) => ({
         ...r.meta,
         path: r.path.split(":lang")[0].replace("-cn", ""),

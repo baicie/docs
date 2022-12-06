@@ -29,6 +29,8 @@ export function getLocalizedPathname(
   path: string;
   query: Record<string, any>;
 } {
+  console.log("getLocalizedPathname", path);
+
   const pathname = path.startsWith("/") ? path : `/${path}`;
   let fullPath;
   if (!zhCN) {

@@ -13,9 +13,6 @@
       </template>
     </a-popover>
     <a-row :style="{ flexFlow: 'nowrap', height: 64 }">
-      <a-col v-bind="colProps[0]">
-        <Logo />
-      </a-col>
       <a-col v-bind="colProps[1]" class="menu-row">
         <!-- <SearchBox
           key="search"
@@ -36,7 +33,7 @@ import { useRoute } from "vue-router";
 import type { GlobalConfig } from "../../App.vue";
 import { GLOBAL_CONFIG } from "../../SymbolKey";
 // import { getLocalizedPathname } from "../../utils/util";
-import Logo from "./Logo.vue";
+// import Logo from "./Logo.vue";
 import Menu from "./Menu.vue";
 // import SearchBox from "./SearchBox.vue";
 // export default defineComponent({
@@ -127,19 +124,6 @@ const headerClassName = {
   clearfix: true,
   "home-header": isHome.value,
 };
-// return {
-//   // isZhCN: globalConfig.isZhCN,
-//   // isMobile: globalConfig.isMobile,
-//   // responsive: globalConfig.responsive,
-//   getLocalizedPathname,
-//   visibleAdblockBanner,
-//   colProps,
-//   menuVisible,
-//   onTriggerSearching,
-//   visibleAlertBanner,
-// };
-//   },
-// });
 </script>
 <style lang="less" src="./index.less"></style>
 <style scope>
@@ -169,5 +153,9 @@ const headerClassName = {
   position: absolute;
   top: 15px;
   right: 15px;
+}
+.menu-row {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

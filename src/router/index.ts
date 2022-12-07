@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import rootRoutes from "./rootRoutes";
 import { afterEach, beforeEach } from "./helper";
+import Nav from "./navInfo";
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/:lang(.*)",
-    redirect: "/docs",
+    redirect: `${Nav[0].path}`,
   },
   ...rootRoutes,
 ];

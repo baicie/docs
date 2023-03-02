@@ -76,9 +76,7 @@ watch(
       ]
     );
     const item = menus.find((m) => m.path === props.activeMenuItem);
-    let title = props.isZhCN
-      ? "Ant Design Vue - 一套企业级 Vue 组件库"
-      : "Ant Design Vue — An enterprise-class UI components based on Ant Design and Vue.js";
+    let title = "文档";
     if (item && item.title) {
       title = props.isZhCN
         ? `${item.subtitle || ""} ${item.title} - 文档`

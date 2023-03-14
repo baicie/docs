@@ -10,7 +10,11 @@
     "routes": "node --loader ts-node/esm src/tools/genrateRoutes.ts"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
     "ant-design-vue": "^3.2.15",
+    "dayjs": "^1.11.7",
+    "debug": "^4.3.4",
+    "lodash-es": "^4.17.21",
     "vue": "^3.2.41",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6"
